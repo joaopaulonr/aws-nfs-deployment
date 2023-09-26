@@ -31,6 +31,20 @@ done
 EOF
 
 #script para a criação do serviço para verficação cíclica.
-cat <<EOF > updown.service
-
-EOF
+cat <<EOF2 > updown.service
+[Unit]
+Description=NginxData - Informações sobre o serviço do NGINX.
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=/srv/validacao_service.sh
+[Install]
+WantedBy=multi-user.target
+EOF2
+#Inicialização do serviço
+mv updown.service /etc/systemd/system
+systemctl enable updown.service
+systemctl start updown.service

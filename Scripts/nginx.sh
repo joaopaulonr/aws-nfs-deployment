@@ -4,10 +4,17 @@
 #Configurações do sistema
 timedatectl set-timezone America/Fortaleza
 
-#instalação ,inicialização e ativação do serviço.
+#instalação ,inicialização e ativação do NGINX.
 amazon-linux-extras install nginx1
 systemctl start nginx.service
 systemctl enable nginx.service
+
+#instalação ,inicialização e ativação do NFS.
+yum -y install nfs-utils
+systemctl start nfs
+systemctl enable nfs
+
+#Configuração do NFS
 
 #script para a validação dos dados
 cat <<EOF > validacao_service.sh

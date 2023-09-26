@@ -24,14 +24,14 @@ resource "aws_security_group" "linux_security_group" {
     cidr_blocks      = ["0.0.0.0/0"]
     }
     ingress {
-    description = "////"
+    description = "NFS"
     from_port        = 2049
     to_port          = 2049
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
     }
     ingress {
-    description = "////"
+    description = "NFS"
     from_port        = 2049
     to_port          = 2049
     protocol         = "udp"

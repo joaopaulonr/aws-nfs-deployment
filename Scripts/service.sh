@@ -22,16 +22,19 @@ cat <<EOF > validacao_service.sh
 while true
 do
 systemctl status nginx.service > status.txt
-STATUS=$(cat status.txt | tr "(" ":" | tr ")" ":" | cut -d ":" -f 3 | sed -n '3p')
-echo "Informacoes coletadas em: [$(date '+%d/%m/%Y %T')]." >> "$(date '+%d-%m-%Y_%T').txt"
-if [ "$STATUS" = "running" ]; then
-    echo "Tempo ativo: $(cat status.txt | cut -d ":" -f 4 | cut -c 8-50 | sed -n '3p')." >> "$(date '+%d-%m-%Y_%T').txt"
-    echo "Serviço: NGINX Status:[$STATUS]" >> "$(date '+%d-%m-%Y_%T').txt"
-    echo "O serviço está rodando perfeitamente!" >> "$(date '+%d-%m-%Y_%T').txt"
+STATUS=\$(cat status.txt | tr "(" ":" | tr ")" ":" | cut -d ":" -f 3 | sed -n '3p')
+LOGFILE=\$(date '+%d-%m-%Y_%T').txt
+NGINX_UPTIME=\$(cat status.txt | cut -d ":" -f 4 | cut -c 8-50 | sed -n '3p')
+
+echo "Informacoes coletadas em: [\$(date '+%d/%m/%Y %T')]." >> "\$LOGFILE"
+if [ "\$STATUS" = "running" ]; then
+    echo "Tempo ativo: \$NGINX_UPTIME." >> "\$LOGFILE"
+    echo "Serviço: NGINX Status:[\$STATUS]" >> "\$LOGFILE"
+    echo "O serviço está rodando perfeitamente!" >> "\$LOGFILE"
 else
-    echo "Tempo fora do ar: $(cat status.txt | cut -d ":" -f 4 | cut -c 8-50 | sed -n '3p')." >> "$(date '+%d-%m-%Y_%T').txt"
-    echo "Serviço: NGINX Status:[$STATUS]" >> "$(date '+%d-%m-%Y_%T').txt"
-    echo "O serviço está fora do ar!" >> "$(date '+%d-%m-%Y_%T').txt"
+    echo "Tempo fora do ar: \$NGINX_UPTIME." >> "\$LOGFILE"
+    echo "Serviço: NGINX Status:[\$STATUS]" >> "\$LOGFILE"
+    echo "O serviço está fora do ar!" >> "\$LOGFILE"
 fi
 sleep 300
 done

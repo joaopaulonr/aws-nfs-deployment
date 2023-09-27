@@ -25,7 +25,7 @@ STATUS=\$(cat status.txt | grep "Active:" | awk '{print $3}' | tr -d '()')
 LOGFILE=\$(date '+%d-%m-%Y_%T').txt
 NGINX_UPTIME=\$(cat status.txt | grep "Active:" | awk '{print $9}')
 
-echo "Informacoes coletadas em: [\$(date '+%d/%m/%Y %T')]." >> "\$LOGFILE"
+echo "Informações coletadas em: [\$(date '+%d/%m/%Y %T')]." >> "\$LOGFILE"
 if [ "\$STATUS" = "running" ]; then
     echo "Tempo ativo: \$NGINX_UPTIME." >> "\$LOGFILE"
     echo "Serviço: NGINX Status:[\$STATUS]" >> "\$LOGFILE"
@@ -38,6 +38,7 @@ fi
 sleep 300
 done
 EOF
+mv validacao_service.sh /srv
 #script para a criação do serviço para verficação cíclica.
 cat <<EOF > updown.service
 [Unit]

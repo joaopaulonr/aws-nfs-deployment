@@ -5,7 +5,7 @@ resource "aws_instance" "linux_instance" {
     subnet_id = aws_subnet.linux_subnet_public.id
     vpc_security_group_ids = [aws_security_group.linux_security_group.id]
     associate_public_ip_address = true
-    user_data = "${file("Scripts/service.sh")}"
+    user_data = "${file("../Scripts/service.sh")}"
     
     root_block_device {
       volume_size = 16

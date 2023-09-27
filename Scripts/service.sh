@@ -1,5 +1,7 @@
 #!/bin/bash
+#Atividade - Linux
 #Script para instalar nginx, NFS e configurar os serviços.
+
 #Configurações do sistema
 yum update -y
 timedatectl set-timezone America/Fortaleza
@@ -20,8 +22,8 @@ systemctl enable nfs
 #Configuração do NFS
 chmod -R /srv/nfs/joaopaulonr
 chown nfsnobody:nfsnobody /srv/nfs/joaopaulonr
-echo "/srv/nfs/joaopaulonr 172.21.0.0/24(rw,sync,no_root_squash,no_all_squash)" >> /etc/exports
-sudo exportfs -rv
+echo "/srv/nfs/joaopaulonr 172.21.0.0/24(rw,wdelay,hide,no_subtree_check,sec=sys,sync,secure,root_squash,no_all_squash)" >> /etc/exports
+exportfs -rv
 
 #script para a validação dos dados
 cat <<EOF > validacao_service.sh
@@ -48,7 +50,7 @@ mv validacao_service.sh /srv/LinuxService
 chmod +x /srv/LinuxService/validacao_service.sh
 
 #script para a criação do serviço para verficação cíclica.
-cat <<EOF > updown.service
+cat <<EOF > upordown.service
 [Unit]
 Description=NginxData - Informações sobre o serviço do NGINX.
 After=network.target
@@ -61,7 +63,8 @@ ExecStart=/srv/LinuxService/validacao_service.sh
 [Install]
 WantedBy=multi-user.target
 EOF
+
 #Inicialização do serviço
-mv updown.service /etc/systemd/system
-systemctl enable updown.service
-systemctl start updown.service
+mv upordown.service /etc/systemd/system
+systemctl enable upordown.service
+systemctl start upordown.service

@@ -1,10 +1,11 @@
 #!/bin/bash
 #Script para instalar nginx, NFS e configurar os serviços.
-
 #Configurações do sistema
+yum update -y
 timedatectl set-timezone America/Fortaleza
 mkdir /srv/LinuxService
-mkdir /srv/LinuxService/Logs
+mkdir /srv/nfs
+mkdir /srv/nfs/joaopaulonr
 
 #instalação ,inicialização e ativação do NGINX.
 amazon-linux-extras install nginx1 -y
@@ -17,6 +18,10 @@ systemctl start nfs
 systemctl enable nfs
 
 #Configuração do NFS
+chmod -R /srv/nfs/joaopaulonr
+chown nfsnobody:nfsnobody /srv/nfs/joaopaulonr
+echo "/srv/nfs/joaopaulonr 172.21.0.0/24(rw,sync,no_root_squash,no_all_squash)" >> /etc/exports
+sudo exportfs -rv
 
 #script para a validação dos dados
 cat <<EOF > validacao_service.sh
@@ -24,7 +29,7 @@ cat <<EOF > validacao_service.sh
 while true; do
 systemctl status nginx.service > status.txt
 STATUS=\$(cat status.txt | grep "Active:" | awk '{print \$3}' | tr -d '()')
-LOGFILE=/srv/LinuxService/Logs/\$(date '+%d-%m-%Y_%T').txt
+LOGFILE=/srv/nfs/joaopaulonr/\$(date '+%d-%m-%Y_%T').txt
 NGINX_UPTIME=\$(cat status.txt | grep "Active:" | awk '{print \$9}')
 echo "Informações coletadas em: [\$(date '+%d/%m/%Y %T')]." >> "\$LOGFILE"
 if [ "\$STATUS" = "running" ]; then

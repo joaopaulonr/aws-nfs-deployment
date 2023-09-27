@@ -3,9 +3,11 @@
 
 #Configurações do sistema
 timedatectl set-timezone America/Fortaleza
+mkdir /srv/LinuxService
+mkdir /srv/LinuxService/Logs
 
 #instalação ,inicialização e ativação do NGINX.
-amazon-linux-extras install nginx1
+amazon-linux-extras install nginx1 -y
 systemctl start nginx.service
 systemctl enable nginx.service
 
@@ -21,10 +23,9 @@ cat <<EOF > validacao_service.sh
 #!/bin/bash
 while true; do
 systemctl status nginx.service > status.txt
-STATUS=\$(cat status.txt | grep "Active:" | awk '{print $3}' | tr -d '()')
-LOGFILE=\$(date '+%d-%m-%Y_%T').txt
-NGINX_UPTIME=\$(cat status.txt | grep "Active:" | awk '{print $9}')
-
+STATUS=\$(cat status.txt | grep "Active:" | awk '{print \$3}' | tr -d '()')
+LOGFILE=/srv/LinuxService/Logs/\$(date '+%d-%m-%Y_%T').txt
+NGINX_UPTIME=\$(cat status.txt | grep "Active:" | awk '{print \$9}')
 echo "Informações coletadas em: [\$(date '+%d/%m/%Y %T')]." >> "\$LOGFILE"
 if [ "\$STATUS" = "running" ]; then
     echo "Tempo ativo: \$NGINX_UPTIME." >> "\$LOGFILE"
@@ -38,7 +39,9 @@ fi
 sleep 300
 done
 EOF
-mv validacao_service.sh /srv
+mv validacao_service.sh /srv/LinuxService
+chmod +x /srv/LinuxService/validacao_service.sh
+
 #script para a criação do serviço para verficação cíclica.
 cat <<EOF > updown.service
 [Unit]
@@ -49,7 +52,7 @@ StartLimitIntervalSec=0
 Type=simple
 Restart=always
 RestartSec=1
-ExecStart=/srv/validacao_service.sh
+ExecStart=/srv/LinuxService/validacao_service.sh
 [Install]
 WantedBy=multi-user.target
 EOF

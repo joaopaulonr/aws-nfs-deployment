@@ -22,28 +22,32 @@ systemctl enable nfs
 #Configuração do NFS
 chmod -R /srv/nfs/joaopaulonr
 chown nfsnobody:nfsnobody /srv/nfs/joaopaulonr
-echo "/srv/nfs/joaopaulonr 172.21.0.0/24(rw,wdelay,hide,no_subtree_check,sec=sys,sync,secure,root_squash,no_all_squash)" >> /etc/exports
+echo "/srv/nfs/joaopaulonr *(rw,wdelay,hide,no_subtree_check,sec=sys,sync,secure,root_squash,no_all_squash)" >> /etc/exports
 exportfs -rv
 
 #script para a validação dos dados
 cat <<EOF > validacao_service.sh
 #!/bin/bash
 while true; do
-systemctl status nginx.service > status.txt
-STATUS=\$(cat status.txt | grep "Active:" | awk '{print \$3}' | tr -d '()')
-LOGFILE=/srv/nfs/joaopaulonr/\$(date '+%d-%m-%Y_%T').txt
-NGINX_UPTIME=\$(cat status.txt | grep "Active:" | awk '{print \$9}')
-echo "Informações coletadas em: [\$(date '+%d/%m/%Y %T')]." >> "\$LOGFILE"
-if [ "\$STATUS" = "running" ]; then
-    echo "Tempo ativo: \$NGINX_UPTIME." >> "\$LOGFILE"
-    echo "Serviço: NGINX Status:[\$STATUS]" >> "\$LOGFILE"
-    echo "O serviço está rodando perfeitamente!" >> "\$LOGFILE"
-else
-    echo "Tempo fora do ar: \$NGINX_UPTIME." >> "\$LOGFILE"
-    echo "Serviço: NGINX Status:[\$STATUS]" >> "\$LOGFILE"
-    echo "O serviço está fora do ar!" >> "\$LOGFILE"
-fi
-sleep 300
+    systemctl status nginx.service > status.txt
+    STATUS=\$(cat status.txt | grep "Active:" | awk '{print \$3}' | tr -d '()')
+    NGINX_UPTIME=\$(cat status.txt | grep "Active:" | awk '{print \$9}')
+    if [ "\$STATUS" = "running" ]; then
+        LOGFILE=/srv/nfs/joaopaulonr/\$(date '+%d-%m-%Y_%T')_UP.txt
+        echo "Informações coletadas em: [\$(date '+%d/%m/%Y %T')]." >> "\$LOGFILE"
+        echo "Tempo ativo: \$NGINX_UPTIME." >> "\$LOGFILE"
+        echo "Serviço: NGINX Status:[\$STATUS]" >> "\$LOGFILE"
+        echo "O serviço está rodando perfeitamente!" >> "\$LOGFILE"
+    else
+        LOGFILE=/srv/nfs/joaopaulonr/\$(date '+%d-%m-%Y_%T')_DOWN.txt
+        echo "Informações coletadas em: [\$(date '+%d/%m/%Y %T')]." >> "\$LOGFILE"
+        echo "Tempo fora do ar: \$NGINX_UPTIME." >> "\$LOGFILE"
+        echo "Serviço: NGINX Status:[\$STATUS]" >> "\$LOGFILE"
+        echo "O serviço está fora do ar!" >> "\$LOGFILE"
+        echo " " >> "\$LOGFILE"
+        systemctl status nginx.service -l --full >> "\$LOGFILE"
+    fi
+    sleep 300
 done
 EOF
 mv validacao_service.sh /srv/LinuxService

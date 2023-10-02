@@ -1,7 +1,7 @@
 # Atividade Linux
 A primeira atividade de um ciclo de sprints em preparação para o DevSecOps visa aplicar os conhecimentos previamente adquiridos durante as duas primeiras sprints, que abordaram temas relacionados à AWS (Amazon Web Services) e ao sistema operacional Linux.
 
-## Requisitos para a Atividade
+## Requisitos para a Atividade.
 
 ### Requisitos AWS:
 - Gerar uma chave pública para acesso ao ambiente.
@@ -23,5 +23,7 @@ A primeira atividade de um ciclo de sprints em preparação para o DevSecOps vis
 - Preparar a execução automatizada do script a cada 5 minutos.
 - Fazer o versionamento da atividade.
 
-## Cenário de implementação
+## Cenário de implementação.
 <img src="assets/Cenário.svg" alt="cenário de implementação na numvem aws.">
+
+## Desenvolvimento da atividade.

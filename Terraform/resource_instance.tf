@@ -24,7 +24,7 @@ resource "aws_instance" "client_instance" {
     instance_type = "t2.micro"
     key_name = "vockey"
     subnet_id = aws_subnet.linux_subnet_public.id
-    vpc_security_group_ids = [aws_security_group.linux_security_group.id]
+    vpc_security_group_ids = [aws_security_group.client_security_group.id]
     associate_public_ip_address = true
     user_data = "${file("../Scripts/client.sh")}"
     
@@ -34,7 +34,7 @@ resource "aws_instance" "client_instance" {
     }
     
     tags = {
-      Name = "linux-nfs-nginx client"
+      Name = "linux-nfs-nginx_client"
       Project = "PB UFC"
       CostCenter = "C092000004"
     }

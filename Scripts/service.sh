@@ -2,30 +2,30 @@
 #Atividade - Linux
 #Script para instalar nginx, NFS e configurar os serviços.
 
-#Configurações do sistema
+#Configurações do sistema.
 yum update -y
 timedatectl set-timezone America/Fortaleza
 mkdir /srv/LinuxService
 mkdir /srv/nfs
 mkdir /srv/nfs/joaopaulonr
 
-#instalação ,inicialização e ativação do NGINX.
+#Instalação ,inicialização e ativação do NGINX.
 amazon-linux-extras install nginx1 -y
 systemctl start nginx.service
 systemctl enable nginx.service
 
-#instalação ,inicialização e ativação do NFS.
+#Instalação ,inicialização e ativação do NFS.
 yum -y install nfs-utils
 systemctl start nfs
 systemctl enable nfs
 
-#Configuração do NFS
+#Configuração do NFS.
 chmod -R /srv/nfs/joaopaulonr
 chown nfsnobody:nfsnobody /srv/nfs/joaopaulonr
 echo "/srv/nfs/joaopaulonr 172.21.0.0/24(rw,wdelay,hide,no_subtree_check,sec=sys,sync,secure,root_squash,no_all_squash)" >> /etc/exports
 exportfs -rv
 
-#script para a validação dos dados
+#Script para a validação dos dados.
 cat <<EOF > validacao_service.sh
 #!/bin/bash
 while true; do
@@ -53,7 +53,7 @@ EOF
 mv validacao_service.sh /srv/LinuxService
 chmod +x /srv/LinuxService/validacao_service.sh
 
-#script para a criação do serviço para verficação cíclica.
+#Script para a criação do serviço para verficação cíclica.
 cat <<EOF > upordown.service
 [Unit]
 Description=NginxData - Informações sobre o serviço do NGINX.
@@ -68,7 +68,7 @@ ExecStart=/srv/LinuxService/validacao_service.sh
 WantedBy=multi-user.target
 EOF
 
-#Inicialização do serviço
+#Inicialização do serviço.
 mv upordown.service /etc/systemd/system
 systemctl enable upordown.service
 systemctl start upordown.service

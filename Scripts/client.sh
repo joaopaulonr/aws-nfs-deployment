@@ -12,7 +12,7 @@ systemctl enable nfs
 #Script para o mount do diretório compartilhado.
 cat <<EOF > mount.sh
 #!/bin/bash 
-mount -t nfs [IP_DO_SERVIDOR]:/srv/nfs/joaopaulonr ~/shared
+mount -t nfs [IP_DO_SERVIDOR]:/srv/nfs/joaopaulonr /home/ec2-user/shared
 EOF
 mv mount.sh /home/ec2-user
 chmod +x /home/ec2-user/mount.sh

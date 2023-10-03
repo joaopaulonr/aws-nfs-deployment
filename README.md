@@ -1,5 +1,5 @@
 # Atividade Linux
-A primeira atividade de um ciclo de sprints em preparação para o DevSecOps visa aplicar os conhecimentos previamente adquiridos durante as duas primeiras sprints, que abordaram temas relacionados à AWS (Amazon Web Services) e ao sistema operacional Linux.
+A primeira atividade de um ciclo de sprints em preparação para DevSecOps,a atividade visa aplicar os conhecimentos previamente adquiridos durante as duas primeiras sprints, que abordaram temas relacionados à AWS (Amazon Web Services) e ao sistema operacional Linux.
 
 ## Requisitos para a Atividade.
 

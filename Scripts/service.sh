@@ -39,15 +39,15 @@ while true; do
     NGINX_UPTIME=\$(cat status.txt | grep "Active:" | awk '{print \$9}')
     if [ "\$STATUS" = "running" ]; then
         LOGFILE=/srv/nfs/joaopaulonr/\$(date '+%d-%m-%Y_%T')_UP.txt
-        echo -e "Informações coletadas em: [\$(date '+%d/%m/%Y %T')]." >> "\$LOGFILE"
-        echo -e "Tempo ativo: \${GREEN}\$NGINX_UPTIME.\${NC}" >> "\$LOGFILE"
+        echo -e "Informações coletadas em: \${BLUE}[\$(date '+%d/%m/%Y %T')]\${NC}." >> "\$LOGFILE"
+        echo -e "Tempo ativo: \${GREEN}\$NGINX_UPTIME\${NC}." >> "\$LOGFILE"
         echo -e "Serviço: \${BLUE}[NGINX]\${NC}" >> "\$LOGFILE"
         echo -e "Status: \${GREEN}[\$STATUS]\${NC}" >> "\$LOGFILE"
         echo -e "\${GREEN}O serviço está rodando perfeitamente!\${NC}" >> "\$LOGFILE"
     else
         LOGFILE=/srv/nfs/joaopaulonr/\$(date '+%d-%m-%Y_%T')_DOWN.txt
-        echo -e "Informações coletadas em: [\$(date '+%d/%m/%Y %T')]." >> "\$LOGFILE"
-        echo -e "Tempo fora do ar: \${RED}\$NGINX_UPTIME.\${NC}" >> "\$LOGFILE"
+        echo -e "Informações coletadas em: \${BLUE}[\$(date '+%d/%m/%Y %T')]\${NC}." >> "\$LOGFILE"
+        echo -e "Tempo fora do ar: \${RED}\$NGINX_UPTIME\${NC}." >> "\$LOGFILE"
         echo -e "Serviço: \${BLUE}[NGINX]\${NC}" >> "\$LOGFILE"
         echo -e "Status: \${RED}[\$STATUS]\${NC}" >> "\$LOGFILE"
         echo -e "\${RED}O serviço está fora do ar!\${NC}" >> "\$LOGFILE"

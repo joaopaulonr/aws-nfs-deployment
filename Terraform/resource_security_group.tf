@@ -10,14 +10,14 @@ resource "aws_security_group" "linux_security_group" {
     cidr_blocks      = ["0.0.0.0/0"]
     }  
     ingress {
-    description = "////"
+    description = "NFS"
     from_port        = 111
     to_port          = 111
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
     }
         ingress {
-    description = "////"
+    description = "NFS"
     from_port        = 111
     to_port          = 111
     protocol         = "udp"
@@ -85,13 +85,6 @@ resource "aws_security_group" "client_security_group" {
     from_port        = -1
     to_port          = -1
     protocol         = "icmp"
-    cidr_blocks      = ["0.0.0.0/0"]
-    }
-    ingress {
-    description = "Regra HTTPs"
-    from_port        = 443
-    to_port          = 443
-    protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
     }
     egress {

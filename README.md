@@ -35,6 +35,17 @@ O script **service.sh** fornece uma configuração para a instalação e configu
 
 Já na configuração do **serviço**, optei por criá-lo utilizando o **systemd**. Embora houvesse a possibilidade de usar o **CRON**, preferi o **systemd** devido à facilidade de gerenciamento, pois permite ativar e desativar o serviço usando o comando **systemctl <opção> upordown.service**.
 
+#### Funcionalidades do script.
+- [x] Atualização dos pacotes do sistema.
+- [x] Configuração do fuso horário para America/Fortaleza.
+- [x] Criação de diretórios necessários para serviços.
+- [x] Instalação, inicialização e ativação do NGINX.
+- [x] Instalação, inicialização e ativação do NFS.
+- [x] Configuração de exportações NFS.
+- [x] Criação de um script de validação para monitorar o status do NGINX.
+- [x] Criação de um serviço systemd para execução do script de validação.
+
+
 #### - Infraestrutura como código.
 Com base na descrição da atividade, utilizei o **Terraform** para declarar minha infraestrutura na AWS, incluindo a criação das instâncias EC2, Elastic IP e configurações de segurança. Para simplificar, não foi necessário armazenar o estado da infraestrutura em um **bucket** da AWS, e optei por armazená-lo localmente.
 ### Stage 2 - Troubleshooting. 

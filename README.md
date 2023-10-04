@@ -36,8 +36,8 @@ O script **service.sh** fornece uma configuração para a instalação e configu
 Já na configuração do **serviço**, optei por criá-lo utilizando o **systemd**. Embora houvesse a possibilidade de usar o **CRON**, preferi o **systemd** devido à facilidade de gerenciamento, pois permite ativar e desativar o serviço usando o comando **systemctl <opção> upordown.service**.
 
 #### - Infraestrutura como código.
-Com base na descrição da atividade, utilizei o **Terraform** para declarar minha infraestruturana AWS, incluindo a criação das instâncias EC2, Elastic IP e configurações de segurança. Para simplificar, não foi necessário armazenar o estado da infraestrutura em um bucket da AWS, e optei por armazená-lo localmente.
+Com base na descrição da atividade, utilizei o **Terraform** para declarar minha infraestrutura na AWS, incluindo a criação das instâncias EC2, Elastic IP e configurações de segurança. Para simplificar, não foi necessário armazenar o estado da infraestrutura em um **bucket** da AWS, e optei por armazená-lo localmente.
 ### Stage 2 - Troubleshooting. 
-Meu principal desafio durante a implementação desta atividade foi a utilização de **tags**, que são obrigatórias para a criação de instâncias na AWS(Em meu cenário). O módulo **EC2_INSTANCE** do Terraform não suporta o atributo **resource_type**, que é comumente usado no console da AWS. Para superar esse obstáculo, tive que pesquisar a documentação do Terraform em busca de uma solução.
+Meu principal desafio durante a implementação desta atividade foi a utilização de **tags** que são obrigatórias para a criação de instâncias na AWS(Em meu cenário). O módulo **EC2_INSTANCE** do Terraform não suporta o atributo **resource_type**, que é comumente usado no console da AWS. Para superar esse obstáculo, tive que pesquisar a documentação do Terraform em busca de uma solução.
 
 Após algumas pesquisas, descobri que o módulo **LAUNCH_TEMPLATE** permitia a especificação dos tipos de recurso das tags. Dessa forma, consegui implantar a infraestrutura corretamente.

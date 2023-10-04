@@ -33,7 +33,7 @@ Nas especificações mencionadas, implementei um script para ser utilizado como 
 
 O script **service.sh** fornece uma configuração para a instalação e configuração dos serviços **NGINX** e **NFS**. 
 
-Já na configuração do **serviço**, optei por criá-lo utilizando o **systemd**. Embora houvesse a possibilidade de usar o **CRON**, preferi o **systemd** devido à facilidade de gerenciamento, pois permite ativar e desativar o serviço usando o comando **systemctl <option> upordown.service**.
+Já na configuração do **serviço**, optei por criá-lo utilizando o **systemd**. Embora houvesse a possibilidade de usar o **CRON**, preferi o **systemd** devido à facilidade de gerenciamento, pois permite ativar e desativar o serviço usando o comando **systemctl <opção> upordown.service**.
 
 #### - Infraestrutura como código.
 Com base na descrição da atividade, utilizei o **Terraform** para declarar minha infraestruturana AWS, incluindo a criação das instâncias EC2, Elastic IP e configurações de segurança. Para simplificar, não foi necessário armazenar o estado da infraestrutura em um bucket da AWS, e optei por armazená-lo localmente.

@@ -37,13 +37,13 @@ Já na configuração do **serviço**, optei por criá-lo utilizando o **systemd
 
 #### Funcionalidades do script.
 - Atualização dos pacotes do sistema.
-- Configuração do fuso horário para America/Fortaleza.
+- Configuração do fuso horário para **America/Fortaleza**.
 - Criação de diretórios necessários para serviços.
-- Instalação, inicialização e ativação do NGINX.
-- Instalação, inicialização e ativação do NFS.
-- Configuração de exportações NFS.
-- Criação de um script de validação para monitorar o status do NGINX.
-- Criação de um serviço systemd para execução do script de validação.
+- Instalação, inicialização e ativação do **NGINX**.
+- Instalação, inicialização e ativação do **NFS**.
+- Configuração de exportações **NFS**.
+- Criação de um script de validação para monitorar o status do **NGINX**.
+- Criação de um serviço **systemd** para execução do script de validação.
 
 
 #### - Infraestrutura como código.

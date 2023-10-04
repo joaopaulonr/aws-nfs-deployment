@@ -27,3 +27,24 @@ A primeira atividade de um ciclo de sprints em preparação para DevSecOps,a ati
 <img src="assets/Cenário.svg" alt="cenário de implementação na numvem aws.">
 
 ## Desenvolvimento da atividade.
+### Stage 1
+#### - Desenvolvimento dos scripts.
+Nas especificações mencionadas, implementei um script para ser utilizado como **user_data** em máquinas na AWS. Isso significa que quando uma máquina é criada, o script é executado automaticamente no modo superusuário, aplicando as configurações especificadas.
+
+O script fornece uma configuração para a instalação e configuração dos serviços **NGINX** e **NFS**. Usei o seguinte comando para criar o script de validação:
+
+**cat << EOF > "script.sh"<br> 
+#comandos aqui<br>
+EOF<br>** 
+
+Isso me permitiu escrever outros scripts durante a execução do user_data, o que facilitou a criação do script de validação e do serviço no systemd de forma automática.
+
+Já na configuração do **serviço**, optei por criá-lo utilizando o **systemd**. Embora houvesse a possibilidade de usar o **CRON**, preferi o systemd devido à facilidade de gerenciamento, pois permite ativar e desativar o serviço usando o comando **systemctl**.
+
+#### - Infraestrutura como código.
+Com base na descrição da atividade, utilizei o **Terraform** para declarar minha infraestrutura. Para simplificar, não foi necessário armazenar o estado da infraestrutura em um bucket da AWS, e optei por armazená-lo localmente.
+### Stage 2
+#### - Troubleshooting.
+Meu principal desafio durante a implementação desta atividade foi a utilização de **tags**, que são obrigatórias para a criação de instâncias na AWS(Em meu cenário). O módulo **EC2_INSTANCE** do Terraform não suporta o atributo **resource_type**, que é comumente usado no console da AWS. Para superar esse obstáculo, tive que pesquisar a documentação do Terraform em busca de uma solução.
+
+Após algumas pesquisas, descobri que o módulo **LAUNCH_TEMPLATE** permitia a especificação dos tipos de recurso das tags. Dessa forma, consegui implantar a infraestrutura corretamente.

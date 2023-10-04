@@ -35,7 +35,7 @@ O script **service.sh** fornece uma configuração para a instalação e configu
 
 Já na configuração do **serviço**, optei por criá-lo utilizando o **systemd**. Embora houvesse a possibilidade de usar o **CRON**, preferi o **systemd** devido à facilidade de gerenciamento, pois permite ativar e desativar o serviço usando o comando **systemctl <opção> upordown.service**.
 
-#### Funcionalidades do script.
+#### Funcionamento do script.
 - Atualização dos pacotes do sistema.
 - Configuração do fuso horário para **America/Fortaleza**.
 - Criação de diretórios necessários para serviços.

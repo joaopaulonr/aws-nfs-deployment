@@ -20,7 +20,7 @@ systemctl start nfs
 systemctl enable nfs
 
 #Configuração do NFS.
-chmod -R 666 /srv/nfs/joaopaulonr
+chmod -R /srv/nfs/joaopaulonr
 chown nfsnobody:nfsnobody /srv/nfs/joaopaulonr
 echo "/srv/nfs/joaopaulonr 172.21.0.0/24(rw,subtree_check,sync,root_squash,no_all_squash)" >> /etc/exports
 exportfs -rv

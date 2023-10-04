@@ -37,7 +37,7 @@ O script fornece uma configuração para a instalação e configuração dos ser
 #comandos aqui<br>
 EOF<br>** 
 
-Isso me permitiu escrever outros scripts durante a execução do user_data, o que facilitou a criação do script de validação e do serviço no systemd de forma automática.
+Isso me permitiu escrever outros scripts durante a execução do **user_data**, o que facilitou a criação do script de validação e do serviço no **systemd** de forma automática.
 
 Já na configuração do **serviço**, optei por criá-lo utilizando o **systemd**. Embora houvesse a possibilidade de usar o **CRON**, preferi o systemd devido à facilidade de gerenciamento, pois permite ativar e desativar o serviço usando o comando **systemctl**.
 

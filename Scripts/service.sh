@@ -60,7 +60,7 @@ EOF
 mv validacao_service.sh /srv/LinuxService
 chmod +x /srv/LinuxService/validacao_service.sh
 
-#Script para a criação do serviço para verficação cíclica.
+#Serviço para verficação cíclica.
 cat <<EOF > upordown.service
 [Unit]
 Description=NginxData - Informações sobre o serviço do NGINX.

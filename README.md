@@ -31,9 +31,12 @@ A primeira atividade de um ciclo de sprints em preparação para DevSecOps,a ati
 #### - Desenvolvimento dos scripts.
 Nas especificações mencionadas, implementei um script para ser utilizado como **user_data** em máquinas na AWS. Isso significa que quando uma máquina é criada, o script é executado automaticamente no modo superusuário, aplicando as configurações especificadas.
 
-O script **service.sh** fornece uma configuração para a instalação e configuração dos serviços **NGINX** e **NFS**. 
+O script [**service.sh**](Scripts/service.sh) fornece uma configuração para a instalação e configuração dos serviços **NGINX** e **NFS**. 
 
 Já na configuração do **serviço**, optei por criá-lo utilizando o **systemd**. Embora houvesse a possibilidade de usar o **CRON**, preferi o **systemd** devido à facilidade de gerenciamento, pois permite ativar e desativar o serviço usando o comando **systemctl <opção> upordown.service**.
+
+<img src="assets/service.png" alt="configuração do serviço.">
+
 
 #### Funcionamento do script.
 - Atualização dos pacotes do sistema.

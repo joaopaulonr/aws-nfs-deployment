@@ -37,7 +37,13 @@ Já na configuração do **serviço**, optei por criá-lo utilizando o **systemd
 
 <img src="assets/service.png" alt="configuração do serviço.">
 
+Para as mensagens personalizadas segui uma regra de nomenclatura **data/hora/status** a partir disso é gerado um log no momento de execução do script de validação.
 
+Se o **NGINX** estiver funcionando de forma normal é retornado:
+<img src="assets/modelo1.png" alt="modelo de mensagem do log.">
+
+Senão:
+<img src="assets/modelo2.png" alt="modelo de mensagem do log.">
 #### Funcionamento do script.
 - Atualização dos pacotes do sistema.
 - Configuração do fuso horário para **America/Fortaleza**.

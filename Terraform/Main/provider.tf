@@ -2,11 +2,14 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "5.17.0"
+      version = "5.25.0"
     }
+  }
+  backend "local" {
+    path = "terraform.tfstate"
   }
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = var.region
 }

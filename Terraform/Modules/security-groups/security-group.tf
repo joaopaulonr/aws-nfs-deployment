@@ -1,7 +1,7 @@
 resource "aws_security_group" "linux_security_group" {
   name        = "allow_Protocols"
   description = "Allow inbound traffic"
-  vpc_id      = aws_vpc.linux_vpc.id
+  vpc_id      = var.vpc_id
   ingress {
     description = "Regra SSH"
     from_port   = 22
@@ -72,7 +72,7 @@ resource "aws_security_group" "linux_security_group" {
 resource "aws_security_group" "client_security_group" {
   name        = "allow_Protocols_client"
   description = "Allow inbound traffic"
-  vpc_id      = aws_vpc.linux_vpc.id
+  vpc_id      = var.vpc_id
   ingress {
     description = "Regra SSH"
     from_port   = 22
